@@ -1,0 +1,9 @@
+torch
+torchvision
+# timm  # for detection and segment tasks
+numpy
+argparse
+time
+gpustat
+random
+logging

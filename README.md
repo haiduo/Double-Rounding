@@ -1,9 +1,29 @@
 # Nearly Lossless Adaptive Bit Switching
-This repository is the official implementation of "Nearly Lossless Adaptive Bit Switching"
+This repository is the official implementation of "Nearly Lossless Adaptive Bit Switching", which includes training, evaluation, and other related scripts.  
 
->📋  Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
+<img width="572" alt="image" src="images\quantization_types.png"> <br>
+_Figure 1: Comparison between different quantization types during quantization-aware training._
 
+>📋 We propose a bit-switching quantization method that doesn't require storing a full-precision model and achieves nearly lossless switching from high-bits to low-bits. Specifically, for different precisions, we propose unified representation, normalized learning steps, and tuned probability distribution so that an efficient and stable learning process is achieved across multiple and mixed precisions, as depicted in Figure 2.
+
+<img width="572" alt="image" src="images\overview.png"> <br>
+_Figure 2: Overview of our proposed lossless adaptive bit-switching strategy._
+
+### The structure of code
+* code <br>
+  * Multi_Precision&nbsp;&nbsp; -->For training Multi_Precision models
+  * Super_net&nbsp;&nbsp; -->For training one-shot Mixed_Precision SuperNets
+  * Super_net_solve&nbsp;&nbsp; -->For searching Mixed_Precision SubNets
+* data 
+  * cifar10
+  * imagenet
+
+ 
 ## Requirements
+We have tested the code on the following environments and settings:
+
+* Python 3.8.19 / Pytorch (>=1.6.0) / torchvision (>=0.7.0)
+* Prepare ImageNet-1k data following pytorch [example](https://github.com/pytorch/examples/tree/main/imagenet).
 
 To install requirements:
 
@@ -11,49 +31,50 @@ To install requirements:
 pip install -r requirements.txt
 ```
 
->📋  Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc...
+>📋  Set up the environment, e.g. we use conda to build our code.
 
 ## Training
 
 To train the model(s) in the paper, run this command:
 
 ```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
-```
+First, need to attain a Pre-trained FP32 model by:
+    python code/Multi_Precision/train.py  -bit_width_list='32' ... etc.
 
->📋  Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
+Then, 
+For multi-precision:
+    python code/Multi_Precision/train.py -bit_width_list='8,6,4,2' ... etc.
+For mixed-precision:
+    (1) Attain the Hessian Matrix Trace:
+        python code/Super_net_solve/cal_hessian.py -bit_width_list='32'  ... etc.
+    (2) Train Mixed-precision models
+        python code/Super_net/train.py -bit_width_list='8,6,4,2' ... etc.
+For SubNets:
+    python code/Super_net_solve/cal_hessian.py --cal_solve
+
+Note that Multi-GPUs parallel training needs to be turned on: --multiprocessing_distributed
+```
 
 ## Evaluation
 
 To evaluate my model on ImageNet, run:
 
 ```eval
-python eval.py --model-file mymodel.pth --benchmark imagenet
+python code/Multi_Precision/train.py --evaluate ... etc.
 ```
 
->📋  Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
 
 ## Pre-trained Models
 
 You can download pretrained models here:
 
-- [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
+- comming soon. 
 
->📋  Give a link to where/how the pretrained models can be downloaded and how they were trained (if applicable).  Alternatively you can have an additional column in your results table with a link to the models.
 
 ## Results
 
-Our model achieves the following performance on :
-
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
-
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
-| ------------------ |---------------- | -------------- |
-| My awesome model   |     85%         |      95%       |
-
->📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
+Please refer to our paper.
 
 
-## Contributing
-
->📋  Pick a licence and describe how to contribute to your code repository. 
+ 
+ 
