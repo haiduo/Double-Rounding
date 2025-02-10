@@ -4,19 +4,19 @@ This repository is the official implementation of "Nearly Lossless Adaptive Bit 
 <img width="572" alt="image" src="images\quantization_types.png"> <br>
 _Figure 1: Comparison between different quantization types during quantization-aware training._
 
->📋 We propose a bit-switching quantization method that doesn't require storing a full-precision model and achieves nearly lossless switching from high-bits to low-bits. Specifically, for different precisions, we propose unified representation, normalized learning steps, and tuned probability distribution so that an efficient and stable learning process is achieved across multiple and mixed precisions, as depicted in Figure 2.
+>📋 We propose a bit-switching quantization method that doesn't require storing a full-precision model and achieves nearly lossless switching from high-bits to low-bits. Specifically, we propose unified representation, normalized learning steps, and tuned probability distribution for different precisions so that an efficient and stable learning process is achieved across multiple and mixed precisions, as depicted in Figure 2.
 
 <img width="572" alt="image" src="images\overview.png"> <br>
 _Figure 2: Overview of our proposed lossless adaptive bit-switching strategy._
 
-### The structure of code
+### The structure of the code
 * code <br>
   * Multi_Precision&nbsp;&nbsp; -->For training Multi_Precision models
   * Super_net&nbsp;&nbsp; -->For training one-shot Mixed_Precision SuperNets
   * Super_net_solve&nbsp;&nbsp; -->For searching Mixed_Precision SubNets
 * data 
   * cifar10
-  * imagenet
+  * Imagenet-1K
 
  
 ## Requirements
@@ -66,14 +66,14 @@ python code/Multi_Precision/train.py --evaluate ... etc.
 
 ## Pre-trained Models
 
-You can download pretrained models here:
+You can download pre-trained models here:
 
-- comming soon. 
+- coming soon. 
 
 
 ## Results
 
-Please refer to our paper.
+Please take a look at our paper.
 
 
  
