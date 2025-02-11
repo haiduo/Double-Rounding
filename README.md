@@ -70,10 +70,20 @@ You can download pre-trained models here:
 
 - coming soon. 
 
+## Reference
+For technical details and full experimental results, please check [the paper of Double rounding](https://arxiv.org/abs/2502.01199).
+```
+@misc{huang2025nearlylosslessadaptivebit,
+      title={Nearly Lossless Adaptive Bit Switching}, 
+      author={Haiduo Huang and Zhenhua Liu and Tian Xia and Wenzhe zhao and Pengju Ren},
+      year={2025},
+      eprint={2502.01199},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2502.01199}, 
+}
+```
 
-## Results
-
-Please take a look at our paper.
 
 
  
